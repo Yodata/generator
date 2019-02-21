@@ -1,0 +1,34 @@
+## {{topicName}} {{~#if topic.deprecated}}(**deprecated**){{~/if}}
+
+{{#if topic.x-summary}}
+{{topic.x-summary}}
+{{/if}}
+
+{{#if topic.parameters}}
+{{~> parameters params=topic.parameters topicName=topicName ~}}
+{{/if}}
+
+{{#if topic.subscribe.oneOf}}
+#### Subscriber receives the following events
+
+| Event | Description | Scope |
+| :---- | :---------- | :---- |
+{{/if}}
+{{~#each topic.subscribe.oneOf as |op index| ~}}
+{{> operationSummary operation=op}}
+{{else}}
+{{~#if topic.subscribe ~}}
+{{~> operation operation=topic.subscribe~}}
+{{~/if~}}
+{{~/each~}}
+
+{{#if topic.publish.oneOf}}
+#### Publishers can send
+{{~#each topic.publish.oneOf as |op index| ~}}
+{{~> operationSummary operation=op~}}
+{{else}}
+{{~#if topic.publish ~}}
+{{~> operation operation=topic.publish~}}
+{{~/if~}}
+{{~/each~}}
+{{/if}}

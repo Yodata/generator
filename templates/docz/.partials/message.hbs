@@ -1,0 +1,30 @@
+## {{messageName}}
+
+{{message.summary}}
+
+
+{{#if operation.tags}}
+{{> tags tags=operation.tags}}
+
+{{/if}}
+{{#if message.headers}}
+{{>messageHeaders headers=message.headers}}
+
+{{/if}}
+{{#if message.formattedExample}}
+```json
+{{{json message.formattedExample}}}
+```
+
+{{else}}
+```json
+{{{message.generatedPayloadExample}}}
+```
+{{/if}}
+
+{{#if message.description}}
+{{{message.description}}}
+
+{{/if}}
+
+{{~>schema schema=message.payload schemaName=@key hideTitle=true hideExample=true ~}}

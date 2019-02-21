@@ -1,0 +1,12 @@
+{{#if propName }}
+| {{tree path}}{{propName}} | {{{typespec .}}} | {{{prop.description}}} {{{rangespec .}}} |
+{{/if}}
+{{#each prop.anyOf}}
+{{> schemaProp prop=. propName=@key path=(buildPath ../propName ../path @key)}}
+{{/each}}
+{{#each prop.oneOf}}
+{{> schemaProp prop=. propName=@key path=(buildPath ../propName ../path @key)}}
+{{/each}}
+{{#each prop.additionalProperties.properties}}
+{{> schemaProp prop=. propName=@key required=(isRequired ../prop.additionalProperties @key) path=(buildPath ../propName ../path @key)}}
+{{/each}}
